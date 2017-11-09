@@ -2,8 +2,8 @@
 /**
  * Write a description of class Sales here.
  *
- * @author (your name)
- * @version (a version number or a date)
+ * @author Connie Huang
+ * @version 11/9/2017
  */
 import java.util.Scanner;
 public class Sales
@@ -38,11 +38,11 @@ public class Sales
                 minID=i;
             }
         }
-        System.out.println("\nTotal sales: " + sum);
-        System.out.println("Average Sales: "+ (double)sum/sales.length);
+        System.out.println("\nTotal sales: $" + String.format("%.2f",(double)sum));
+        System.out.println("Average Sales: $" +String.format("%.2f",(double)sum/sales.length));
         System.out.println("\nSalesperson "+(maxID+1)+" had the highest sale with $"+
-                            sales[maxID]);
-        System.out.println("Salesperson "+(minID+1)+" had the lowest sale with $"+
-                            sales[minID]);                    
+                            String.format("%.2f",(double)sales[maxID]));
+        System.out.println("Salesperson "+(minID+1)+" had the lowest sale with $"+ 
+                            String.format("%.2f",(double)sales[minID]));                    
     }
 }
