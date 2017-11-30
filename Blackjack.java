@@ -65,8 +65,8 @@ public class Blackjack
                 }
 
             }else{
-                System.out.println("Dealer's first card: "+ dealer.get(0)+
-                                   "\nType \"HIT\" to hit or \"STAY\" to stay: ");
+                System.out.println("\nDealer's first card: "+ dealer.get(0)+
+                                   "\n\nType \"HIT\" to hit or \"STAY\" to stay: ");
                 String b = scan.next();
                 index = 2;
                 while(b.equalsIgnoreCase("hit")){
