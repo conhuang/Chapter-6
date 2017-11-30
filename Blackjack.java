@@ -18,19 +18,23 @@ public class Blackjack
         String a = scan.next();
 
         ArrayList<Card> hand1 = new ArrayList<Card>();
-        Card [] dealer = new Card[2];
+        ArrayList<Card> dealer = new ArrayList<Card>();
+        int points, dealerPoints, index, d;
         while(a.equalsIgnoreCase("y")){
-            hand1.add(0,deck.dealCard());
-            dealer[0]=deck.dealCard();
-            hand1.add(1,deck.dealCard());
-            dealer[1]=deck.dealCard();
-            if(hand1.size()>2){
-                for(int y=2; y<hand1.size(); y++){
-                    hand1.remove(y);
-                }
+            points=0;
+            dealerPoints=0;
+            for(int y=0; y<hand1.size(); y++){
+                hand1.remove(y);
             }
-            
-            int points=0;
+            for(int z=0;z<dealer.size();z++){
+                dealer.remove(z);
+            }
+
+            hand1.add(0,deck.dealCard());
+            dealer.add(0,deck.dealCard());
+            hand1.add(1,deck.dealCard());
+            dealer.add(1,deck.dealCard());
+
             for(int i = 0; i<2;i++){
                 for (int j = 1; j<9; j++){
                     if(hand1.get(i).getFace().equals(deck.faces[j]))
@@ -43,30 +47,29 @@ public class Blackjack
                 if(hand1.get(i).getFace().equals("Ace"))
                     points+=11;
             }
-            
-            int dealerPoints = 0;
-            for(Card x: dealer){
+
+            for(int i = 0; i<2;i++){
                 for (int j = 1; j<9; j++){
-                    if(x.getFace().equals(deck.faces[j]))
+                    if(dealer.get(i).getFace().equals(deck.faces[j]))
                         dealerPoints+=(j+1);
                 }
                 for (int k = 9; k<13; k++){
-                    if(x.getFace().equals(deck.faces[k]))
+                    if(dealer.get(i).getFace().equals(deck.faces[k]))
                         dealerPoints+=10;
                 }
-                if(x.getFace().equals("Ace"))
+                if(dealer.get(i).getFace().equals("Ace"))
                     dealerPoints+=11;
             }
-            
+
             System.out.print("\nYour hand: \n\t"+hand1.get(0)+"\n\t"+hand1.get(1)+
                 "\n\nType \"HIT\" to hit or \"STAY\" to stay: ");
             String b = scan.next();
-            int index = 2;
+            index = 2;
             while(b.equalsIgnoreCase("hit")){
                 hand1.add(deck.dealCard());
-                for (int d = 1; d<9; d++){
-                    if(hand1.get(index).getFace().equals(deck.faces[d]))
-                        points+=(d+1);
+                for (int f = 1; f<9; f++){
+                    if(hand1.get(index).getFace().equals(deck.faces[f]))
+                        points+=(f+1);
                 }
                 for (int r = 9; r<13; r++){
                     if(hand1.get(index).getFace().equals(deck.faces[r]))
@@ -83,17 +86,44 @@ public class Blackjack
                 System.out.print("\nHIT or STAY? ");
                 b = scan.next();
             }
-            System.out.println("\nDealer's hand: \n\t"+dealer[0]+"\n\t"+dealer[1]);
-            if (points == 21){
-                System.out.println("\nBLACKJACK! YOU WIN!!");
+            d = 2;
+
+            while (dealerPoints<15){
+                System.out.println("\nDealer hits.");
+                dealer.add(deck.dealCard());
+                for (int j = 1; j<9; j++){
+                    if(dealer.get(d).getFace().equals(deck.faces[j]))
+                        dealerPoints+=(j+1);
+                }
+                for (int k = 9; k<13; k++){
+                    if(dealer.get(d).getFace().equals(deck.faces[k]))
+                        dealerPoints+=10;
+                }
+                if(dealer.get(d).getFace().equals("Ace"))
+                    dealerPoints+=1;
+                d++;
             }
+
+            System.out.println("\nDealer's hand: ");
+            for(int i = 0; i<dealer.size(); i++){
+                System.out.println("\t"+dealer.get(i));
+            }
+
+            if(points==dealerPoints){
+                System.out.println("Push.");
+            }else if((points > dealerPoints || dealerPoints>21) && points<22){
+                System.out.println("YOU WIN!!");
+            }else if (dealerPoints<22){
+                System.out.println("Dealer wins.");
+            }else{
+                System.out.println("Nobody wins :(");
+            }
+
             System.out.println(points+ " "+dealerPoints);
             System.out.print("\nPlay again(Y/N)? ");
-                a = scan.next();
-            /*if(points>21){
-                System.out.println("Dealer wins.");
-            }
-            */
+            a = scan.next();
+
         }
+        System.out.println("Thanks for playing!");
     }
 }
