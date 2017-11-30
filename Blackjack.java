@@ -23,12 +23,8 @@ public class Blackjack
         while(a.equalsIgnoreCase("y")){
             points=0;
             dealerPoints=0;
-            for(int y=0; y<hand1.size(); y++){
-                hand1.remove(y);
-            }
-            for(int z=0;z<dealer.size();z++){
-                dealer.remove(z);
-            }
+            hand1 = new ArrayList<Card>();
+            dealer = new ArrayList<Card>();
 
             hand1.add(0,deck.dealCard());
             dealer.add(0,deck.dealCard());
