@@ -83,6 +83,10 @@ public class FinchSimon
                         break;
                     }
                 }
+                if (play){
+                    System.out.println("Nice one!");
+                    finch.saySomething("You did it!");
+                }
             }
             
             System.out.println("You had " + moves + " moves.");
